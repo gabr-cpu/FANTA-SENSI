@@ -203,16 +203,66 @@ async function verificarKey(){
 function gerarSensi(){
 
     const celular =
-    document.getElementById("celular").value;
+    document.getElementById("celular").value.trim();
 
-    if(!celular){
+    if(celular.length < 4){
 
-        alert("Digite o celular");
+        alert("Digite um celular válido");
         return;
 
     }
 
-    const dpi = random(500, 800);
+    const marcas = [
+        "samsung",
+        "iphone",
+        "xiaomi",
+        "redmi",
+        "poco",
+        "motorola",
+        "realme",
+        "infinix",
+        "asus",
+        "lg"
+    ];
+
+    let valido = false;
+
+    marcas.forEach(marca => {
+
+        if(
+            celular.toLowerCase().includes(marca)
+        ){
+            valido = true;
+        }
+
+    });
+
+    if(!valido){
+
+        alert("Digite um modelo de celular válido");
+        return;
+
+    }
+
+    let dpi;
+
+    if(celular.toLowerCase().includes("iphone")){
+
+        dpi = random(550, 650);
+
+    }else if(
+        celular.toLowerCase().includes("xiaomi") ||
+        celular.toLowerCase().includes("redmi") ||
+        celular.toLowerCase().includes("poco")
+    ){
+
+        dpi = random(620, 780);
+
+    }else{
+
+        dpi = random(500, 700);
+
+    }
 
     const geral = random(180, 200);
     const redDot = random(170, 195);
@@ -237,6 +287,9 @@ function gerarSensi(){
 
     💥 <b>AWM:</b> ${awm}
 
+    `;
+
+}
     `;
 
 }
